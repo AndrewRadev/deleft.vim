@@ -1,0 +1,57 @@
+*deleft.txt*	TODO
+
+==============================================================================
+CONTENTS                                        *deleft*   *deleft-contents*
+
+    Installation................................: |deleft-installation|
+    Usage.......................................: |deleft-usage|
+    Settings....................................: |deleft-settings|
+    Internals...................................: |deleft-internals|
+    Issues......................................: |deleft-issues|
+
+
+==============================================================================
+INSTALLATION                                            *deleft-installation*
+
+There are several ways to install the plugin. The recommended one is by using
+Tim Pope's pathogen (http://www.vim.org/scripts/script.php?script_id=2332). In
+that case, you can clone the plugin's git repository like so:
+>
+    git clone https://github.com/AndrewRadev/deleft.vim ~/.vim/bundle/deleft
+<
+If your vim configuration is under git version control, you could also set up
+the repository as a submodule, which would allow you to update more easily.
+The command is (provided you're in ~/.vim):
+>
+    git submodule add https://github.com/AndrewRadev/deleft.vim bundle/deleft
+<
+
+Another way is to simply copy all the essential directories inside the ~/.vim
+directory: TODO list of directories
+
+
+==============================================================================
+USAGE                                                          *deleft-usage*
+
+TODO
+
+
+==============================================================================
+SETTINGS                                                    *deleft-settings*
+
+TODO
+
+
+==============================================================================
+INTERNALS                                                  *deleft-internals*
+
+TODO
+
+==============================================================================
+ISSUES                                                        *deleft-issues*
+
+Any issues and suggestions are very welcome on the github bugtracker:
+https://github.com/AndrewRadev/deleft.vim/issues
+
+
+vim:tw=78:sw=4:ft=help:norl:
