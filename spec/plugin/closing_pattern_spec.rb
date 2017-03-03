@@ -18,7 +18,7 @@ describe "with a closing pattern" do
       end
     EOF
 
-    vim.command "let b:dh_closing_pattern = '^\\s*end\\>'"
+    vim.command "let b:deleft_closing_pattern = '^\\s*end\\>'"
 
     vim.search 'one'
     vim.command 'Deleft'
