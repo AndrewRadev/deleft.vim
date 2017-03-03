@@ -39,6 +39,6 @@ endfunction
 function! s:DecreaseIndent(from, to, amount)
   let saved_cursor = getpos('.')
   let command = repeat('<', a:amount)
-  exe a:from.','.a:to.command
+  silent exe a:from.','.a:to.command
   call setpos('.', saved_cursor)
 endfunction

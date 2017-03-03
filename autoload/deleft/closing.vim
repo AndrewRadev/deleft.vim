@@ -27,14 +27,14 @@ function! deleft#closing#Run()
   let end_lineno = current_lineno
 
   if end_lineno - start_lineno > 1
-    exe (start_lineno + 1).','.(end_lineno - 1).'<'
+    silent exe (start_lineno + 1).','.(end_lineno - 1).'<'
 
     if found_end
       " then the end line is the block-closer, delete it
-      exe end_lineno.'delete _'
+      silent exe end_lineno.'delete _'
     endif
   endif
 
-  exe start_lineno.'delete'
+  silent exe start_lineno.'delete'
   echo
 endfunction
