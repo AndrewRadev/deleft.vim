@@ -1,4 +1,26 @@
 function! deleft#closing#Run()
+  let matchit_info = deleft#MatchitInfo()
+  if matchit_info == {}
+    return s:SimpleDeleft()
+  endif
+
+  let [current_start, current_end] = matchit_info.current_group
+  if current_start >= 0
+    call deleft#Deindent(current_start, current_end)
+  endif
+
+  for group in matchit_info.groups
+    let [start, end] = group
+    call deleft#Deindent(start, end)
+    call deleft#Comment(start, end)
+  endfor
+
+  for delimiter in reverse(copy(matchit_info.delimiters))
+    silent exe delimiter.'delete _'
+  endfor
+endfunction
+
+function! s:SimpleDeleft()
   if !exists('b:deleft_closing_pattern')
     let b:deleft_closing_pattern = '.'
   end

@@ -12,12 +12,16 @@ command! Deleft call s:Deleft()
 nnoremap dh :call <SID>Deleft()<cr>
 
 function! s:Deleft()
+  let saved_view = winsaveview()
+  normal! ^
+
   if index(s:indent_based_filetypes, &filetype) >= 0
-    " TODO (2017-03-01) Two levels or more? (Visual mode)
-    call deleft#indent#Run('n')
+    call deleft#indent#Run()
   else
     call deleft#closing#Run()
   endif
+
+  call winrestview(saved_view)
 endfunction
 
 let &cpo = s:keepcpo
