@@ -16,9 +16,9 @@ function! s:Deleft()
   normal! ^
 
   if index(s:indent_based_filetypes, &filetype) >= 0
-    call deleft#indent#Run()
+    call deleft#Run({'indent': 1})
   else
-    call deleft#closing#Run()
+    call deleft#Run({'indent': 0})
   endif
 
   call winrestview(saved_view)
