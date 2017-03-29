@@ -4,9 +4,29 @@ function! deleft#Deindent(from, to)
   call setpos('.', saved_cursor)
 endfunction
 
-function! deleft#Comment(start, end)
-  " TODO (2017-03-07) Make this a generic strategy
-  exe a:start.','.a:end.'TComment'
+function! deleft#Remove(start, end)
+  let strategy = g:deleft_remove_strategy
+
+  if strategy == 'delete'
+    exe a:start.','.a:end.'delete _'
+    return 1
+  elseif strategy == 'comment'
+    if exists(':TComment')
+      call deleft#Deindent(a:start, a:end)
+      exe a:start.','.a:end.'TComment'
+      return 1
+    else
+      echoerr
+            \ "No supported comment plugin installed."
+            \ "Possible plugins: TComment"
+      return 0
+    endif
+  else
+    echoerr
+          \ "Unknown removal strategy: '".strategy."'."
+          \ "Available strategies: 'delete', 'comment'."
+    return 0
+  endif
 endfunction
 
 function! deleft#Run(params)
@@ -26,13 +46,33 @@ function! deleft#Run(params)
     call deleft#Deindent(current_start, current_end)
   endif
 
-  for group in matchit_info.groups
-    let [start, end] = group
-    call deleft#Deindent(start, end)
-    call deleft#Comment(start, end)
+  for entry in matchit_info.ItemsToRemove()
+    let [type, line_range] = entry
+    let [start, end] = line_range
+
+    if type == 'delimiter'
+      exe start.','.end.'delete _'
+    elseif type == 'inactive_group'
+      if !deleft#Remove(start, end)
+        return
+      endif
+    else
+      echoerr "Unknown type of an item to removed: '".type."'"
+      return
+    endif
+  endfor
+endfunction
+
+function! deleft#Flatten(list)
+  let flat_list = []
+
+  for item in a:list
+    if type(item) == type([])
+      call extend(flat_list, deleft#Flatten(item))
+    else
+      call add(flat_list, item)
+    endif
   endfor
 
-  for delimiter in reverse(copy(matchit_info.delimiters))
-    silent exe delimiter.'delete _'
-  endfor
+  return flat_list
 endfunction

@@ -8,6 +8,11 @@ set cpo&vim
 
 let s:indent_based_filetypes = ['coffee', 'python', 'haml', 'slim']
 
+if !exists('g:deleft_remove_strategy')
+  " possible values: "comment", "delete"
+  let g:deleft_remove_strategy = 'delete'
+endif
+
 command! Deleft call s:Deleft()
 nnoremap dh :call <SID>Deleft()<cr>
 
