@@ -1,4 +1,4 @@
-*deleft.txt*	TODO
+*deleft.txt*	Delete a wrapping if-clause, try-catch block, etc. and shift left.
 
 ==============================================================================
 CONTENTS                                        *deleft*   *deleft-contents*
