@@ -1,5 +1,4 @@
 function! deleft#indent#SimpleDeleft()
-  " TODO (2017-03-29) Register?
   normal! dd
 
   let start_line = line('.')
