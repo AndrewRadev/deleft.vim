@@ -4,6 +4,5 @@ end
 
 desc "Prepare archive for deployment"
 task :archive do
-  puts "TODO"
-  # sh 'zip -r ~/deleft.zip doc/deleft.txt'
+  sh 'zip -r ~/deleft.zip autoload/ doc/deleft.txt plugin/'
 end

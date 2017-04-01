@@ -8,7 +8,6 @@ describe "with a closing pattern" do
     vim.set 'shiftwidth', 2
   end
 
-  # TODO (2017-03-01) How to handle the `else` in the middle?
   specify "removes a wrapping if-clause, leaving the `else`" do
     set_file_contents <<~EOF
       if one?
