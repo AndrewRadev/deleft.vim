@@ -1,5 +1,3 @@
-" TODO (2017-03-29) Ignore inline "return"s in matchit matches, use indent
-
 function! deleft#matchit#Parse(params)
   if !exists('g:loaded_matchit')
     " matchit wouldn't work anyway
@@ -22,6 +20,7 @@ function! deleft#matchit#Parse(params)
         \ }
 
   let initial_line = line('.')
+  let base_indent = indent(initial_line)
   let current_delimiter = initial_line
   normal %
   let current_line = line('.')
@@ -31,6 +30,14 @@ function! deleft#matchit#Parse(params)
       " then either the cursor hasn't moved, or it's jumped to something we've
       " already covered, stop here
       break
+    endif
+
+    if indent(current_line) > base_indent
+      " then this one doesn't count as a delimiter (for example, "return" for
+      " the "function"/"endfunction" pair. Jump to the next match
+      normal %
+      let current_line = line('.')
+      continue
     endif
 
     call add(matchit_info.delimiters, current_line)
