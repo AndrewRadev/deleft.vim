@@ -19,37 +19,37 @@ function! deleft#matchit#Parse(params)
         \ 'ItemsToRemove': function('deleft#matchit#ItemsToRemove'),
         \ }
 
-  let initial_line = line('.')
-  let base_indent = indent(initial_line)
-  let current_delimiter = initial_line
+  let initial_lineno = line('.')
+  let base_indent = indent(initial_lineno)
+  let current_delimiter = initial_lineno
   normal %
-  let current_line = line('.')
+  let current_lineno = line('.')
 
   while 1
-    if index(matchit_info.delimiters, current_line) >= 0
+    if index(matchit_info.delimiters, current_lineno) >= 0
       " then either the cursor hasn't moved, or it's jumped to something we've
       " already covered, stop here
       break
     endif
 
-    if indent(current_line) > base_indent
+    if indent(current_lineno) > base_indent
       " then this one doesn't count as a delimiter (for example, "return" for
       " the "function"/"endfunction" pair. Jump to the next match
       normal %
-      let current_line = line('.')
+      let current_lineno = line('.')
       continue
     endif
 
-    call add(matchit_info.delimiters, current_line)
+    call add(matchit_info.delimiters, current_lineno)
 
-    if current_line == initial_line
+    if current_lineno == initial_lineno
       " then we're back at the start, stop looking
       break
     endif
 
     " Jump to the next match
     normal %
-    let current_line = line('.')
+    let current_lineno = line('.')
   endwhile
 
   if len(matchit_info.delimiters) <= 1
