@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "indent-based languages" do
+describe "indent-based languages, not using matchit" do
   let(:filename) { 'test.py' }
 
   specify "Removes a wrapping if-clause" do

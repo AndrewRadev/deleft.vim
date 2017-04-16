@@ -3,9 +3,10 @@ require 'spec_helper'
 describe "with a closing pattern, not using matchit" do
   let(:filename) { 'test.rb' }
 
-  before :each do
+  def setup_filetype
     vim.set 'expandtab'
     vim.set 'shiftwidth', 2
+    vim.command 'unlet b:match_words'
   end
 
   specify "removes a wrapping if-clause, leaving the `else`" do
@@ -17,7 +18,7 @@ describe "with a closing pattern, not using matchit" do
       end
     EOF
 
-    vim.command 'unlet b:match_words'
+    setup_filetype
     vim.command "let b:deleft_closing_pattern = '^\\s*end\\>'"
 
     vim.search 'one'
@@ -40,7 +41,7 @@ describe "with a closing pattern, not using matchit" do
       end
     EOF
 
-    vim.command 'unlet b:match_words'
+    setup_filetype
     vim.command "let b:deleft_closing_pattern = '^\\s*else\\>'"
 
     vim.search 'one'
@@ -63,8 +64,7 @@ describe "with a closing pattern, not using matchit" do
       end
     EOF
 
-    vim.command 'unlet b:match_words'
-    vim.command "let b:deleft_closing_pattern = '^\\s*end\\>'"
+    setup_filetype
 
     vim.search 'else'
     vim.command 'Deleft'
