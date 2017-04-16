@@ -21,6 +21,13 @@ function! deleft#closing#SimpleDeleft()
       break
     endif
 
+    if indent(current_lineno) < indent(start_lineno)
+      " haven't found an end, but indentation is off, so let's just delete
+      " what we have
+      silent exe start_lineno.'delete'
+      return
+    endif
+
     let current_lineno = nextnonblank(current_lineno + 1)
   endwhile
 
@@ -36,5 +43,4 @@ function! deleft#closing#SimpleDeleft()
   endif
 
   silent exe start_lineno.'delete'
-  echo
 endfunction
