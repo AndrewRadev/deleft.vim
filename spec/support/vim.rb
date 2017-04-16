@@ -6,7 +6,7 @@ module Support
     end
 
     def expect_file_contents(string)
-      expect(IO.read(filename).strip).to eq(string.rstrip)
+      expect(IO.read(filename).chomp).to eq(string.chomp)
     end
   end
 end

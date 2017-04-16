@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "with a closing pattern" do
+describe "with a closing pattern, not using matchit" do
   let(:filename) { 'test.rb' }
 
   before :each do
@@ -17,6 +17,7 @@ describe "with a closing pattern" do
       end
     EOF
 
+    vim.command 'unlet b:match_words'
     vim.command "let b:deleft_closing_pattern = '^\\s*end\\>'"
 
     vim.search 'one'
@@ -39,6 +40,7 @@ describe "with a closing pattern" do
       end
     EOF
 
+    vim.command 'unlet b:match_words'
     vim.command "let b:deleft_closing_pattern = '^\\s*else\\>'"
 
     vim.search 'one'
@@ -61,6 +63,7 @@ describe "with a closing pattern" do
       end
     EOF
 
+    vim.command 'unlet b:match_words'
     vim.command "let b:deleft_closing_pattern = '^\\s*end\\>'"
 
     vim.search 'else'
