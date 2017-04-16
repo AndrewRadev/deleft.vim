@@ -135,7 +135,7 @@ function! s:ProcessDelimitedGroups(current_delimiter, matchit_info)
   " Check if we should ignore the current group, now that we're done with it
   " in the previous loop
   if matchit_info.current_group[1] - matchit_info.current_group[0] < 0
-    " then there's at least one line in the group
+    " then there's no lines in the group
     let matchit_info.current_group = [-1, -1]
   endif
 
@@ -168,7 +168,7 @@ function! deleft#matchit#ItemsToRemove() dict
 
     " does the line fit in the last group?
     let group = reversed_groups[0]
-    if group[0] >= line && group[1] <= line
+    if group[0] <= line && group[1] >= line
       let line = group[0] - 1
       call add(entries, ['inactive_group', remove(reversed_groups, 0)])
       continue
