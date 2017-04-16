@@ -21,6 +21,11 @@ function! deleft#Remove(start, end)
             \ "Possible plugins: TComment"
       return 0
     endif
+  elseif strategy == 'spaces'
+    call deleft#Deindent(a:start, a:end)
+    call append(a:end, '')
+    call append(a:start - 1, '')
+    return 1
   else
     echoerr
           \ "Unknown removal strategy: '".strategy."'."
