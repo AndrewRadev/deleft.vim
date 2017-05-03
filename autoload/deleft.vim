@@ -11,16 +11,7 @@ function! deleft#Remove(start, end)
     exe a:start.','.a:end.'delete _'
     return 1
   elseif strategy == 'comment'
-    if exists(':TComment')
-      call deleft#Deindent(a:start, a:end)
-      exe a:start.','.a:end.'TComment'
-      return 1
-    else
-      echoerr
-            \ "No supported comment plugin installed."
-            \ "Possible plugins: TComment"
-      return 0
-    endif
+    return s:Comment(a:start, a:end)
   elseif strategy == 'spaces'
     call deleft#Deindent(a:start, a:end)
     call append(a:end, '')
@@ -80,4 +71,31 @@ function! deleft#Flatten(list)
   endfor
 
   return flat_list
+endfunction
+
+function! s:Comment(start, end)
+  if exists(':TComment')
+    call deleft#Deindent(a:start, a:end)
+    exe a:start.','.a:end.'TComment'
+    return 1
+  elseif exists('g:loaded_nerd_comments')
+    call deleft#Deindent(a:start, a:end)
+    let saved_cursor = getpos('.')
+
+    exe a:start
+    if a:end > a:start
+      exe 'normal! V'.(a:end - a:start).'j'
+    else
+      exe 'normal! V'
+    endif
+
+    exe "normal \<Plug>NERDCommenterComment"
+    call setpos('.', saved_cursor)
+    return 1
+  else
+    echoerr
+          \ "No supported comment plugin installed."
+          \ "Possible plugins: TComment"
+    return 0
+  endif
 endfunction
