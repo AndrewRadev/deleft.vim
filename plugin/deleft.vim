@@ -13,8 +13,8 @@ if !exists('g:deleft_indent_based_filetypes')
 endif
 
 if !exists('g:deleft_remove_strategy')
-  " possible values: "comment", "delete", "spaces"
-  let g:deleft_remove_strategy = 'delete'
+  " possible values: "none", "comment", "delete", "spaces"
+  let g:deleft_remove_strategy = 'none'
 endif
 
 command! Deleft call s:Deleft()

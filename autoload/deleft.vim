@@ -7,7 +7,11 @@ endfunction
 function! deleft#Remove(start, end)
   let strategy = g:deleft_remove_strategy
 
-  if strategy == 'delete'
+  if strategy == 'none'
+    " just deindent, and leave it
+    call deleft#Deindent(a:start, a:end)
+    return 1
+  elseif strategy == 'delete'
     exe a:start.','.a:end.'delete _'
     return 1
   elseif strategy == 'comment'
@@ -20,7 +24,7 @@ function! deleft#Remove(start, end)
   else
     echoerr
           \ "Unknown removal strategy: '".strategy."'."
-          \ "Available strategies: 'delete', 'comment'."
+          \ "Available strategies: 'none', 'delete', 'comment', 'spaces'."
     return 0
   endif
 endfunction
