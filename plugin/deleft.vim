@@ -12,13 +12,19 @@ if !exists('g:deleft_indent_based_filetypes')
   let g:deleft_indent_based_filetypes = []
 endif
 
+if !exists('g:deleft_mapping')
+  let g:deleft_mapping = 'dh'
+endif
+
 if !exists('g:deleft_remove_strategy')
   " possible values: "none", "comment", "delete", "spaces"
   let g:deleft_remove_strategy = 'none'
 endif
 
 command! Deleft call s:Deleft()
-nnoremap dh :call <SID>Deleft()<cr>
+if g:deleft_mapping != ''
+  exe 'nnoremap '.g:deleft_mapping.' :call <SID>Deleft()<cr>'
+endif
 
 function! s:Deleft()
   let saved_view = winsaveview()
