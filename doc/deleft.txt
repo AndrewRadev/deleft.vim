@@ -6,12 +6,11 @@ CONTENTS                                        *deleft*   *deleft-contents*
     Installation................................: |deleft-installation|
     Usage.......................................: |deleft-usage|
     Settings....................................: |deleft-settings|
-    Internals...................................: |deleft-internals|
     Issues......................................: |deleft-issues|
 
 
 ==============================================================================
-INSTALLATION                                            *deleft-installation*
+INSTALLATION                                               *deleft-installation*
 
 There are several ways to install the plugin. The recommended one is by using
 Tim Pope's pathogen (http://www.vim.org/scripts/script.php?script_id=2332). In
@@ -31,24 +30,159 @@ directory: autoload, doc, plugin.
 
 
 ==============================================================================
-USAGE                                                          *deleft-usage*
+USAGE                                                             *deleft-usage*
 
-TODO
+This plugin allows you to delete wrapping if-clauses, try-catch blocks, and
+similar constructs. For example:
+>
+    <div class="container">
+      <a href="#">Something</a>
+    </div>
+<
+Executing the |:Deleft| command or using the provided |dh| mapping on the
+container div results in just:
+>
+    <a href="#">Something</a>
+<
+So, the mapping/command deletes the opening and closing HTML tag and shifts
+the code to the left (hence the name "deleft", from "delete left").
+
+Note that |dh| is a built-in mapping, but it's a synonym to |x|, so I'm okay
+with overwriting it. Set |g:deleft_mapping| to "" (or whatever else you like)
+to avoid this.
+
+The plugin attempts to use the extended match definitions from |matchit|. In
+ruby, for instance, the |matchit.vim| (built-in) plugin lets you jump between
+any related `if`/`elsif`/`else`/`end` lines:
+>
+    if one?
+      two
+    elsif two?
+      three
+    else
+      four
+    end
+<
+Delefting the if-clause will also remove all other else-like lines, anything
+that the matchit plugin jumps to, as long as it's at the same level of indent,
+leaving you with just this:
+>
+    two
+    three
+    four
+<
+If you'd like to handle the "contents" of the code blocks differently, you can
+decide this using the "remove strategy".
+
+Remove strategies ~
+
+By default, the plugin deletes the "wrapping" if-clauses and else-clauses,
+leaving all the code inside intact, as-is. You might want to do something
+different, though. You can change this by changing the setting
+|g:deleft_remove_strategy|. By default, its value is "none".
+
+For instance, changing the value to "comment" results in the "inactive" clause
+being commented out (as long as you have a supported commenting plugin). In
+this example:
+>
+    if true
+      puts "OK!"
+    else
+      puts "There's something wrong here!"
+    end
+<
+With the cursor on `if true` and remove strategy set to "delete", delefting
+results in:
+>
+    puts "OK!"
+    # puts "There's something wrong here!"
+<
+But, with the cursor on `else`, the results is:
+>
+    # puts "OK!"
+    puts "There's something wrong here!"
+<
+You can read the documentation on |g:deleft_remove_strategy| for the full
+list of strategies and supported comment plugins.
+
+Non-matchit ("simple") delefting ~
+
+If you don't have matchit activated, for some reason, or you're using a
+filetype that doesn't have matchit definitions, the plugin will just attempt
+to match the indent of the line you're deleting and the next line with the
+same indent. Or, in an indent-based language, it would delete the current line
+and deindent everything "underneath".
+
+So, if you're writing python, which doesn't seem to have matchit definitions
+at the time of writing, you can still delete, say, a wrapping if-clause with
+deleft. Do consider adding your own matchit support, though, as described in
+|matchit-newlang|.
+
+In order to determine which languages are indent-based, the plugin just
+maintains a list of them. If you'd like to add your own to the list, you can
+add it to |g:deleft_indent_based_filetypes|.
 
 
 ==============================================================================
-SETTINGS                                                    *deleft-settings*
+SETTINGS                                                       *deleft-settings*
 
-TODO
+
+                                                      *g:deleft_remove_strategy*
+>
+    let g:deleft_remove_strategy = "delete"
+<
+Default value: "none"
+
+When faced with if-clauses with else blocks or similar constructs, the plugin
+has to decide how to "remove" the inactive ones (the ones other than where the
+cursor is). The possible removal strategies are: "none", "delete", "comment",
+and "spaces". A description follows:
+
+- "none": Do nothing. Useful to avoid losing any code, you can handle the
+  extra stuff later.
+
+- "delete": Just remove the leftover code. Might be useful for `catch` blocks
+  that no longer make sense without the `try`.
+
+- "comment": As long as you have a supported commenting plugin, this will
+  comment out the inactive blocks.
+
+- "spaces": Similar to "none", but leaves a blank line between the blocks, so
+  it's easier to visually separate them.
+
+The supported comment plugins for the "comment" option are:
+
+- TComment:      https://github.com/tomtom/tcomment_vim
+- Commentary:    https://github.com/tpope/vim-commentary
+- NERDCommenter: https://github.com/scrooloose/nerdcommenter
+
+                                                              *g:deleft_mapping*
+>
+    let g:deleft_mapping = '<leader>dh'
+<
+Default value: dh
+
+Change this to change the mapping the plugin defines. Set it to an empty
+string, "", to just remove the mapping altogether -- you can still use the
+|:Deleft| command to activate it.
+
+                    *g:deleft_indent_based_filetypes*
+>
+    let g:deleft_indent_based_filetypes = ['some-fancy-filetype']
+<
+Default value: []
+
+If you have some indent-based filetype that the plugin doesn't know about, and
+you need the "simple" (non-matchit) matching for it, the plugin should be told
+about it. This variable should be set to a list of all those filetypes. If
+it's a relatively common one that I've missed, feel free to make a pull
+request to add it to the built-ins.
+
+At time of writing, the built-ins are: coffee, python, haml, slim.
 
 
 ==============================================================================
-INTERNALS                                                  *deleft-internals*
-
-TODO
-
-==============================================================================
-ISSUES                                                        *deleft-issues*
+ISSUES                                                           *deleft-issues*
 
 Any issues and suggestions are very welcome on the github bugtracker:
 https://github.com/AndrewRadev/deleft.vim/issues
