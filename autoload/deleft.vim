@@ -78,6 +78,10 @@ function! s:Comment(start, end)
     call deleft#Deindent(a:start, a:end)
     exe a:start.','.a:end.'TComment'
     return 1
+  elseif exists(':Commentary')
+    call deleft#Deindent(a:start, a:end)
+    exe a:start.','.a:end.'Commentary'
+    return 1
   elseif exists('g:loaded_nerd_comments')
     call deleft#Deindent(a:start, a:end)
     let saved_cursor = getpos('.')
