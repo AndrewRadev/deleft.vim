@@ -57,7 +57,7 @@ function! deleft#matchit#Parse(params)
     return {}
   endif
 
-  call sort(matchit_info.delimiters, 'f')
+  call sort(matchit_info.delimiters, function("s:CompareNumbers"))
 
   if indent_filetype
     call s:ProcessIndentGroups(current_delimiter, matchit_info)
@@ -178,4 +178,8 @@ function! deleft#matchit#ItemsToRemove() dict
   endwhile
 
   return entries
+endfunction
+
+function! s:CompareNumbers(first, second)
+  return a:first - a:second
 endfunction

@@ -14,7 +14,7 @@ Vimrunner::RSpec.configure do |config|
     if vim.echo('exists(":packadd")').to_i > 0
       vim.command('packadd matchit')
     else
-      vim.command('runtime plugin/matchit.vim')
+      vim.command('runtime macros/matchit.vim')
     end
 
     vim

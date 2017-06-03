@@ -5,6 +5,7 @@ describe "indent-based languages, using matchit" do
 
   def setup_filetype
     vim.command("let b:match_words = '\\<if\\>:\\<else\\>'")
+    vim.set 'shiftwidth', 4
   end
 
   describe "strategy: delete" do

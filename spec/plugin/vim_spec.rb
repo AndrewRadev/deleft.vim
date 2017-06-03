@@ -4,6 +4,8 @@ describe "filetype: vim" do
   let(:filename) { 'test.vim' }
 
   specify "working on functions (ignore `return`s)" do
+    vim.set 'shiftwidth', 2
+
     set_file_contents <<~EOF
       " Example
       function! Example()
