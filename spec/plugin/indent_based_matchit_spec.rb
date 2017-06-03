@@ -8,7 +8,11 @@ describe "indent-based languages, using matchit" do
   end
 
   describe "strategy: delete" do
-    # Default strategy, no need to set variables
+    around :each do |example|
+      vim.command('let g:deleft_remove_strategy = "delete"')
+      example.run
+      vim.command('let g:deleft_remove_strategy = "none"')
+    end
 
     specify "Removes a wrapping if-clause" do
       set_file_contents <<~EOF
@@ -44,7 +48,7 @@ describe "indent-based languages, using matchit" do
     around :each do |example|
       vim.command('let g:deleft_remove_strategy = "spaces"')
       example.run
-      vim.command('let g:deleft_remove_strategy = "delete"')
+      vim.command('let g:deleft_remove_strategy = "none"')
     end
 
     specify "Removes a wrapping if-clause" do
