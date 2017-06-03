@@ -23,7 +23,7 @@ endif
 
 command! Deleft call s:Deleft()
 if g:deleft_mapping != ''
-  exe 'nnoremap '.g:deleft_mapping.' :call <SID>Deleft()<cr>'
+  exe 'nnoremap <silent> '.g:deleft_mapping.' :call <SID>Deleft()<cr>'
 endif
 
 function! s:Deleft()
