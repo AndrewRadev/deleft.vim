@@ -1,6 +1,6 @@
 ## Usage
 
-![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/974b1a0df532dec625e30a956bbde18e080c1b2c/demo/demo_restclient.gif)
+![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/4074f409c113e59f2dee43e7b8b8615c4013f54e/demo/demo_restclient.gif)
 
 [![Build Status](https://secure.travis-ci.org/AndrewRadev/deleft.vim.png?branch=master)](http://travis-ci.org/AndrewRadev/deleft.vim)
 
@@ -24,9 +24,9 @@ Note that `dh` is a built-in mapping, but it's a synonym to `x`, so I'm okay wit
 
 Here's some more examples:
 
-![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/974b1a0df532dec625e30a956bbde18e080c1b2c/demo/demo_containers.gif)
-![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/974b1a0df532dec625e30a956bbde18e080c1b2c/demo/demo_callbacks.gif)
-![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/974b1a0df532dec625e30a956bbde18e080c1b2c/demo/demo_move_down.gif)
+![HAML Containers demo](https://github.com/AndrewRadev/deleft.vim/raw/4074f409c113e59f2dee43e7b8b8615c4013f54e/demo/demo_containers.gif)
+![Coffeescript callbacks demo](https://github.com/AndrewRadev/deleft.vim/raw/4074f409c113e59f2dee43e7b8b8615c4013f54e/demo/demo_callbacks.gif)
+![Rails controller demo](https://github.com/AndrewRadev/deleft.vim/raw/4074f409c113e59f2dee43e7b8b8615c4013f54e/demo/demo_move_down.gif)
 
 The plugin attempts to use the extended match definitions from [`matchit`](http://vimhelp.appspot.com/matchit.txt.html#matchit). In ruby, for instance, the matchit.vim (built-in) plugin lets you jump between any related `if`/`elsif`/`else`/`end` lines:
 
