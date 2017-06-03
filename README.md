@@ -1,8 +1,8 @@
-## Usage
-
 ![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/4074f409c113e59f2dee43e7b8b8615c4013f54e/demo/demo_restclient.gif)
 
 [![Build Status](https://secure.travis-ci.org/AndrewRadev/deleft.vim.png?branch=master)](http://travis-ci.org/AndrewRadev/deleft.vim)
+
+## Usage
 
 This plugin allows you to delete wrapping if-clauses, try-catch blocks, and similar constructs. For example:
 
