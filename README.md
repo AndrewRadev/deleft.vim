@@ -1,5 +1,9 @@
 ## Usage
 
+![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/974b1a0df532dec625e30a956bbde18e080c1b2c/demo/demo_restclient.gif)
+
+[![Build Status](https://secure.travis-ci.org/AndrewRadev/deleft.vim.png?branch=master)](http://travis-ci.org/AndrewRadev/deleft.vim)
+
 This plugin allows you to delete wrapping if-clauses, try-catch blocks, and similar constructs. For example:
 
 ``` html
@@ -17,6 +21,12 @@ Executing the `:Deleft` command or using the provided `dh` mapping on the contai
 So, the mapping/command deletes the opening and closing HTML tag and shifts the code to the left (hence the name "deleft", from "delete left").
 
 Note that `dh` is a built-in mapping, but it's a synonym to `x`, so I'm okay with overwriting it. Set `g:deleft_mapping` to "" (or whatever else you like) to avoid this.
+
+Here's some more examples:
+
+![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/974b1a0df532dec625e30a956bbde18e080c1b2c/demo/demo_containers.gif)
+![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/974b1a0df532dec625e30a956bbde18e080c1b2c/demo/demo_callbacks.gif)
+![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/974b1a0df532dec625e30a956bbde18e080c1b2c/demo/demo_move_down.gif)
 
 The plugin attempts to use the extended match definitions from [`matchit`](http://vimhelp.appspot.com/matchit.txt.html#matchit). In ruby, for instance, the matchit.vim (built-in) plugin lets you jump between any related `if`/`elsif`/`else`/`end` lines:
 
