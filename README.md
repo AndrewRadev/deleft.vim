@@ -20,7 +20,7 @@ Executing the `:Deleft` command or using the provided `dh` mapping on the contai
 
 So, the mapping/command deletes the opening and closing HTML tag and shifts the code to the left (hence the name "deleft", from "delete left").
 
-Note that `dh` is a built-in mapping, but it's a synonym to `x`, so I'm okay with overwriting it. Set `g:deleft_mapping` to "" (or whatever else you like) to avoid this.
+Note that `dh` is a built-in mapping, but it's a synonym to `x`, so I'm okay with overwriting it. Set `g:deleft_mapping` to `""` (or whatever else you like) to avoid this.
 
 Here's some more examples:
 
