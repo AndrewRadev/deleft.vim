@@ -28,7 +28,7 @@ Here's some more examples:
 ![Coffeescript callbacks demo](https://github.com/AndrewRadev/deleft.vim/raw/4074f409c113e59f2dee43e7b8b8615c4013f54e/demo/demo_callbacks.gif)
 ![Rails controller demo](https://github.com/AndrewRadev/deleft.vim/raw/4074f409c113e59f2dee43e7b8b8615c4013f54e/demo/demo_move_down.gif)
 
-The plugin attempts to use the extended match definitions from [`matchit`](http://vimhelp.appspot.com/matchit.txt.html#matchit). In ruby, for instance, the matchit.vim (built-in) plugin lets you jump between any related `if`/`elsif`/`else`/`end` lines:
+The plugin attempts to use the extended match definitions from `matchit`. In ruby, for instance, the matchit.vim (built-in) plugin lets you jump between any related `if`/`elsif`/`else`/`end` lines:
 
 ``` ruby
 if one?
@@ -84,7 +84,7 @@ You can read the documentation on `g:deleft_remove_strategy` for the full list o
 
 If you don't have matchit activated, for some reason, or you're using a filetype that doesn't have matchit definitions, the plugin will just attempt to match the indent of the line you're deleting and the next line with the same indent. Or, in an indent-based language, it would delete the current line and deindent everything "underneath".
 
-So, if you're writing python, which doesn't seem to have matchit definitions at the time of writing, you can still delete, say, a wrapping if-clause with deleft. Do consider adding your own matchit support, though, as described in [`:help matchit-newlang`](http://vimhelp.appspot.com/matchit.txt.html#matchit%2dnewlang).
+So, if you're writing python, which doesn't seem to have matchit definitions at the time of writing, you can still delete, say, a wrapping if-clause with deleft. Do consider adding your own matchit support, though, as described in `:help matchit-newlang`.
 
 In order to determine which languages are indent-based, the plugin just maintains a list of them. If you'd like to add your own to the list, you can add it to `g:deleft_indent_based_filetypes`.
 
