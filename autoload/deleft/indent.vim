@@ -2,7 +2,7 @@ function! deleft#indent#SimpleDeleft()
   normal! dd
 
   let start_line = line('.')
-  let end_line = deleft#indent#LowerIndentLimit(nextnonblank(start_line + 1))
+  let end_line = deleft#indent#LowerIndentLimit(start_line)
 
   call deleft#Deindent(start_line, end_line)
 endfunction
