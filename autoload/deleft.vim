@@ -32,8 +32,12 @@ endfunction
 function! deleft#Run(params)
   let indent_filetype = a:params.indent
 
-  let matchit_info = deleft#matchit#Parse({'indent': indent_filetype})
-  if matchit_info == {}
+  let match_info = deleft#custom#Parse()
+  if match_info == {}
+    let match_info = deleft#matchit#Parse({'indent': indent_filetype})
+  endif
+
+  if match_info == {}
     if indent_filetype
       return deleft#indent#SimpleDeleft()
     else
@@ -41,12 +45,12 @@ function! deleft#Run(params)
     endif
   endif
 
-  let [current_start, current_end] = matchit_info.current_group
+  let [current_start, current_end] = match_info.current_group
   if current_start >= 0
     call deleft#Deindent(current_start, current_end)
   endif
 
-  for entry in matchit_info.ItemsToRemove()
+  for entry in s:ItemsToRemove(match_info)
     let [type, line_range] = entry
     let [start, end] = line_range
 
@@ -106,4 +110,44 @@ function! s:Comment(start, end)
           \ "Possible plugins: TComment"
     return 0
   endif
+endfunction
+
+" Iterate items to remove with their type, either "delimiter" or
+" "inactive_group". This is done in one go, because any removal of lines
+" offsets everything else
+function! s:ItemsToRemove(match_info)
+  let match_info = a:match_info
+  let entries = []
+
+  let all_lines = deleft#Flatten([match_info.groups, match_info.delimiters])
+  let max_line = max(all_lines)
+  let min_line = min(all_lines)
+  let reversed_groups = reverse(copy(match_info.groups))
+
+  let line = max_line
+  while line >= min_line
+    if index(match_info.delimiters, line) >= 0
+      call add(entries, ['delimiter', [line, line]])
+      let line -= 1
+      continue
+    endif
+
+    if len(reversed_groups) == 0
+      " no groups left, keep going with delimiters
+      let line -= 1
+      continue
+    endif
+
+    " does the line fit in the last group?
+    let group = reversed_groups[0]
+    if group[0] <= line && group[1] >= line
+      let line = group[0] - 1
+      call add(entries, ['inactive_group', remove(reversed_groups, 0)])
+      continue
+    endif
+
+    let line -= 1
+  endwhile
+
+  return entries
 endfunction

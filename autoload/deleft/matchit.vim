@@ -15,8 +15,6 @@ function! deleft#matchit#Parse(params)
         \ 'delimiters': [],
         \ 'current_group': [-1, -1],
         \ 'groups': [],
-        \
-        \ 'ItemsToRemove': function('deleft#matchit#ItemsToRemove'),
         \ }
 
   let initial_lineno = line('.')

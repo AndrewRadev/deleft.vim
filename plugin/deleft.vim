@@ -30,6 +30,40 @@ function! s:Deleft()
   let saved_view = winsaveview()
   normal! ^
 
+  " TODO (2020-06-14) Could be more reliable than going to the start of the
+  " line, maybe, evaluate:
+  "
+  " if exists('b:match_words')
+  "   " parse them, jump back to the nearest one that works
+  "   let regex_parts = []
+  "   for word_set in split(b:match_words, '\\\@<!,')
+  "     for word in split(word_set, '\\\@<!:')
+  "       call add(regex_parts, '\%('.word.'\)')
+  "     endfor
+  "   endfor
+  "   let regex = join(regex_parts, '\|')
+  "
+  "   call search(regex, 'bWc', line('.'))
+  "
+  "   " TODO (2020-05-08) Properly execute skip pattern (s:, R:)
+  "   " if exists('b:match_skip')
+  "   "   let pattern = escape(b:match_skip, "'")
+  "   "   let skip = "synIDattr(synID(line('.'),col('.'),1),'name') =~ '".pattern."'"
+  "   " else
+  "   "   let skip = ''
+  "   " endif
+  "   "
+  "   " if search(regex, 'bWc', line('.')) > 0
+  "   "   if skip != '' && eval(skip)
+  "   "     while search(regex, 'bW', line('.')) > 0
+  "   "       if !eval(skip)
+  "   "         break
+  "   "       endif
+  "   "     endwhile
+  "   "   endif
+  "   " endif
+  " endif
+
   let indent_based_filetypes = []
   call extend(indent_based_filetypes, s:indent_based_filetypes)
   call extend(indent_based_filetypes, g:deleft_indent_based_filetypes)
