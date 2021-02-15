@@ -36,6 +36,13 @@ function! deleft#Remove(start, end)
   endif
 endfunction
 
+" match_info details:
+"
+" - delimiters:    the line numbers of the if/else/etc lines (to be removed)
+" - groups:        the [start, end] line numbers of the bodies between the delimiters
+" - current_group: the [start, end] of the group where the cursor is. *Not*
+"                  included in `groups`.
+"
 function! deleft#Run(params)
   let indent_filetype = get(a:params, 'indent', 0)
 
