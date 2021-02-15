@@ -10,7 +10,6 @@ function! deleft#matchit#Parse(params)
   endif
 
   let indent_filetype = a:params.indent
-  let saved_position = getpos('.')
   let matchit_info = {
         \ 'delimiters': [],
         \ 'current_group': [-1, -1],

@@ -30,7 +30,7 @@ function! deleft#Remove(start, end)
 endfunction
 
 function! deleft#Run(params)
-  let indent_filetype = a:params.indent
+  let indent_filetype = get(a:params, 'indent', 0)
 
   let match_info = deleft#custom#Parse()
   if match_info == {}
@@ -138,11 +138,18 @@ function! s:ItemsToRemove(match_info)
       continue
     endif
 
+    let group = remove(reversed_groups, 0)
+
+    if group == match_info.current_group
+      " then we won't be removing it, keep going
+      let line = group[0] - 1
+      continue
+    endif
+
     " does the line fit in the last group?
-    let group = reversed_groups[0]
     if group[0] <= line && group[1] >= line
       let line = group[0] - 1
-      call add(entries, ['inactive_group', remove(reversed_groups, 0)])
+      call add(entries, ['inactive_group', group])
       continue
     endif
 

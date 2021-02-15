@@ -23,4 +23,9 @@ end
 
 RSpec.configure do |config|
   config.include Support::Vim
+
+  config.before :each do
+    # Reset to default plugin settings
+    vim.command('let g:deleft_remove_strategy = "none"')
+  end
 end
