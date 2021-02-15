@@ -1,6 +1,6 @@
 ![RestClient demo](https://github.com/AndrewRadev/deleft.vim/raw/4074f409c113e59f2dee43e7b8b8615c4013f54e/demo/demo_restclient.gif)
 
-[![Build Status](https://secure.travis-ci.org/AndrewRadev/deleft.vim.png?branch=master)](http://travis-ci.org/AndrewRadev/deleft.vim)
+[![Build Status](https://secure.travis-ci.org/AndrewRadev/deleft.vim.svg?branch=main)](http://travis-ci.org/AndrewRadev/deleft.vim)
 
 ## Usage
 
@@ -94,4 +94,4 @@ Some filetypes don't have useful matchit definitions for stuff like if-clauses a
 
 ## Contributing
 
-Pull requests are welcome, but take a look at [CONTRIBUTING.md](https://github.com/AndrewRadev/deleft.vim/blob/master/CONTRIBUTING.md) first for some guidelines.
+Pull requests are welcome, but take a look at [CONTRIBUTING.md](./CONTRIBUTING.md) first for some guidelines.
