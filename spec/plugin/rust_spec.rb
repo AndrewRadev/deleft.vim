@@ -5,12 +5,11 @@ describe "filetype: rust" do
 
   describe "strategy: delete" do
     before :each do
+      vim.set 'shiftwidth', 2
       vim.command('let g:deleft_remove_strategy = "delete"')
     end
 
     specify "working on if-clauses" do
-      vim.set 'shiftwidth', 2
-
       set_file_contents <<~EOF
         // Example
         if 2 < 1 {
@@ -32,9 +31,7 @@ describe "filetype: rust" do
       EOF
     end
 
-    specify "empty blocks" do
-      vim.set 'shiftwidth', 2
-
+    specify "if-clauses with empty blocks" do
       set_file_contents <<~EOF
         // Example
         if 2 < 1 {
@@ -69,8 +66,6 @@ describe "filetype: rust" do
     end
 
     specify "working on if-clauses" do
-      vim.set 'shiftwidth', 2
-
       set_file_contents <<~EOF
         // Example
         if 2 < 1 {
@@ -96,9 +91,7 @@ describe "filetype: rust" do
       EOF
     end
 
-    specify "empty blocks" do
-      vim.set 'shiftwidth', 2
-
+    specify "if-clauses with empty blocks" do
       set_file_contents <<~EOF
         // Example
         if 2 < 1 {
