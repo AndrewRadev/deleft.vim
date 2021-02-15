@@ -1,9 +1,3 @@
-" let match_info = {
-"       \ 'delimiters':    [],
-"       \ 'current_group': [-1, -1],
-"       \ 'groups':        [],
-"       \ }
-
 function! deleft#custom#Parse()
   if &ft == 'rust'
     return deleft#custom#ParseRust()
@@ -50,10 +44,15 @@ function! deleft#custom#ParseRust()
           \ prevnonblank(line('.') - 1),
           \ ]
 
-    call add(match_info.groups, group)
+    if group[1] - group[0] < 0
+      " then there's no lines in this group, nothing to do with it
+      continue
+    endif
 
     if if_line == start_line
       let match_info.current_group = group
+    else
+      call add(match_info.groups, group)
     endif
   endwhile
 

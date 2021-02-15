@@ -9,10 +9,8 @@ describe "indent-based languages, using matchit" do
   end
 
   describe "strategy: delete" do
-    around :each do |example|
+    before :each do
       vim.command('let g:deleft_remove_strategy = "delete"')
-      example.run
-      vim.command('let g:deleft_remove_strategy = "none"')
     end
 
     specify "Removes a wrapping if-clause" do
@@ -46,10 +44,8 @@ describe "indent-based languages, using matchit" do
   end
 
   describe "strategy: spaces" do
-    around :each do |example|
+    before :each do
       vim.command('let g:deleft_remove_strategy = "spaces"')
-      example.run
-      vim.command('let g:deleft_remove_strategy = "none"')
     end
 
     specify "Removes a wrapping if-clause" do
@@ -70,7 +66,6 @@ describe "indent-based languages, using matchit" do
         print("foo")
 
         print("bar")
-
       EOF
 
       vim.command 'undo'

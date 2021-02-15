@@ -9,7 +9,7 @@ function! deleft#matchit#Parse(params)
     return {}
   endif
 
-  let indent_filetype = a:params.indent
+  let indent_filetype = get(a:params, 'indent', 0)
   let matchit_info = {
         \ 'delimiters': [],
         \ 'current_group': [-1, -1],
@@ -137,44 +137,6 @@ function! s:ProcessDelimitedGroups(current_delimiter, matchit_info)
   endif
 
   return matchit_info
-endfunction
-
-" Iterate items to remove with their type, either "delimiter" or
-" "inactive_group". This is done in one go, because any removal of lines
-" offsets everything else
-function! deleft#matchit#ItemsToRemove() dict
-  let entries = []
-  let all_lines = deleft#Flatten([self.groups, self.delimiters])
-  let max_line = max(all_lines)
-  let min_line = min(all_lines)
-  let reversed_groups = reverse(copy(self.groups))
-
-  let line = max_line
-  while line >= min_line
-    if index(self.delimiters, line) >= 0
-      call add(entries, ['delimiter', [line, line]])
-      let line -= 1
-      continue
-    endif
-
-    if len(reversed_groups) == 0
-      " no groups left, keep going with delimiters
-      let line -= 1
-      continue
-    endif
-
-    " does the line fit in the last group?
-    let group = reversed_groups[0]
-    if group[0] <= line && group[1] >= line
-      let line = group[0] - 1
-      call add(entries, ['inactive_group', remove(reversed_groups, 0)])
-      continue
-    endif
-
-    let line -= 1
-  endwhile
-
-  return entries
 endfunction
 
 function! s:CompareNumbers(first, second)

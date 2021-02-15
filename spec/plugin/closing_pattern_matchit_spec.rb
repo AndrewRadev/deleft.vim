@@ -9,10 +9,8 @@ describe "with a closing pattern, using matchit" do
   end
 
   describe "strategy: delete" do
-    around :each do |example|
+    before :each do
       vim.command('let g:deleft_remove_strategy = "delete"')
-      example.run
-      vim.command('let g:deleft_remove_strategy = "none"')
     end
 
     specify "removes a wrapping if-clause, leaving only the selected contents" do
@@ -45,10 +43,8 @@ describe "with a closing pattern, using matchit" do
   end
 
   describe "strategy: spaces" do
-    around :each do |example|
+    before :each do
       vim.command('let g:deleft_remove_strategy = "spaces"')
-      example.run
-      vim.command('let g:deleft_remove_strategy = "none"')
     end
 
     specify "removes a wrapping if-clause, leaving spaces around the contents" do
@@ -68,7 +64,6 @@ describe "with a closing pattern, using matchit" do
         puts "one"
 
         puts "two"
-
       EOF
 
       vim.command('undo')

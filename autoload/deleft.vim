@@ -18,8 +18,15 @@ function! deleft#Remove(start, end)
     return s:Comment(a:start, a:end)
   elseif strategy == 'spaces'
     call deleft#Deindent(a:start, a:end)
-    call append(a:end, '')
-    call append(a:start - 1, '')
+
+    if a:end < line('$') && getline(a:end + 1) !~ '^\s*$'
+      call append(a:end, '')
+    endif
+
+    if a:start > 1 && getline(a:start - 1) !~ '^\s*$'
+      call append(a:start - 1, '')
+    endif
+
     return 1
   else
     echoerr
@@ -138,18 +145,12 @@ function! s:ItemsToRemove(match_info)
       continue
     endif
 
-    let group = remove(reversed_groups, 0)
-
-    if group == match_info.current_group
-      " then we won't be removing it, keep going
-      let line = group[0] - 1
-      continue
-    endif
+    let group = reversed_groups[0]
 
     " does the line fit in the last group?
     if group[0] <= line && group[1] >= line
       let line = group[0] - 1
-      call add(entries, ['inactive_group', group])
+      call add(entries, ['inactive_group', remove(reversed_groups, 0)])
       continue
     endif
 
