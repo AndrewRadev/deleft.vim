@@ -124,9 +124,10 @@ add it to |g:deleft_indent_based_filetypes|.
 
 Custom filetype support ~
 
-Some filetypes don't have useful matchit definitions for stuff like
-if-clauses. In that case, the plugin might have a custom definition that
-handles it. For now, only Rust if-clauses get special treatment.
+Some filetypes don't have useful matchit definitions for stuff like if-clauses
+and it's hard to implement them. In that case, the plugin might have a custom
+definition that handles it. For now, only Rust if-clauses get special
+treatment.
 
 
 ==============================================================================

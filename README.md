@@ -88,6 +88,10 @@ So, if you're writing python, which doesn't seem to have matchit definitions at 
 
 In order to determine which languages are indent-based, the plugin just maintains a list of them. If you'd like to add your own to the list, you can add it to `g:deleft_indent_based_filetypes`.
 
+### Custom filetype support
+
+Some filetypes don't have useful matchit definitions for stuff like if-clauses and it's hard to implement them. In that case, the plugin might have a custom definition that handles it. For now, only Rust if-clauses get special treatment.
+
 ## Contributing
 
 Pull requests are welcome, but take a look at [CONTRIBUTING.md](https://github.com/AndrewRadev/deleft.vim/blob/master/CONTRIBUTING.md) first for some guidelines.
