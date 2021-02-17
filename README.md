@@ -2,6 +2,10 @@
 
 [![Build Status](https://secure.travis-ci.org/AndrewRadev/deleft.vim.svg?branch=main)](http://travis-ci.org/AndrewRadev/deleft.vim)
 
+## Screencast
+
+For a video explanation, here's a [demo](https://youtu.be/DLgQp4xf0lQ).
+
 ## Usage
 
 This plugin allows you to delete wrapping if-clauses, try-catch blocks, and similar constructs. For example:
