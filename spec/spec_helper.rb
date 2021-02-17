@@ -17,12 +17,6 @@ Vimrunner::RSpec.configure do |config|
     # bootstrap filetypes
     vim.command 'autocmd BufNewFile,BufRead *.rs set filetype=rust'
 
-    if vim.echo('exists(":packadd")').to_i > 0
-      vim.command('packadd matchit')
-    else
-      vim.command('runtime macros/matchit.vim')
-    end
-
     vim
   end
 end

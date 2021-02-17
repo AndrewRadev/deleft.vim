@@ -33,6 +33,7 @@ endif
 augroup Deleft
   autocmd!
 
+  " Python doesn't have built-in matchit support, but this should work:
   autocmd FileType python let b:deleft_match_words = '\<if\>:\<elif\>:\<else\>'
   autocmd FileType python let b:deleft_match_skip  = 'R:^\s*'
 augroup END
