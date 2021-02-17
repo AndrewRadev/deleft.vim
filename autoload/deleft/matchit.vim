@@ -4,6 +4,12 @@ function! deleft#matchit#Parse(params)
     return {}
   endif
 
+  if !exists('b:match_words') && exists('b:deleft_match_words')
+    " Set up match words
+    let b:match_words = b:deleft_match_words
+    let b:match_skip  = b:deleft_match_skip
+  endif
+
   if !exists('b:match_words')
     " no special definitions for this buffer, wouldn't work
     return {}

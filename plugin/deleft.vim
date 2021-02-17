@@ -30,6 +30,13 @@ if !exists('g:deleft_remove_strategy')
   let g:deleft_remove_strategy = 'none'
 endif
 
+augroup Deleft
+  autocmd!
+
+  autocmd FileType python let b:deleft_match_words = '\<if\>:\<elif\>:\<else\>'
+  autocmd FileType python let b:deleft_match_skip  = 'R:^\s*'
+augroup END
+
 command! Deleft call s:Deleft()
 if g:deleft_mapping != ''
   exe 'nnoremap <silent> '.g:deleft_mapping.' :silent Deleft<cr>'
