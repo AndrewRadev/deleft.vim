@@ -6,6 +6,15 @@ let g:loaded_deleft = '0.1.0' " version number
 let s:keepcpo = &cpo
 set cpo&vim
 
+" Initialize matchit, a requirement
+if !exists('g:loaded_matchit')
+  if has(':packadd')
+    packadd matchit
+  else
+    runtime macros/matchit.vim
+  endif
+endif
+
 let s:indent_based_filetypes = ['coffee', 'python', 'haml', 'slim']
 
 if !exists('g:deleft_indent_based_filetypes')
