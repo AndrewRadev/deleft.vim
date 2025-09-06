@@ -17,9 +17,9 @@ function! deleft#matchit#Parse(params)
 
   let indent_filetype = get(a:params, 'indent', 0)
   let matchit_info = {
-        \ 'delimiters': [],
+        \ 'delimiters':    [],
         \ 'current_group': [-1, -1],
-        \ 'groups': [],
+        \ 'groups':        [],
         \ }
 
   let initial_lineno = line('.')

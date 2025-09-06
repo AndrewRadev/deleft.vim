@@ -1,45 +1,43 @@
 require 'spec_helper'
 
 describe "indent-based languages, not using matchit" do
-  let(:filename) { 'test.py' }
+  let(:filename) { 'test.yaml' }
 
-  specify "Removes a wrapping if-clause" do
+  specify "Removes a wrapping object" do
     set_file_contents <<~EOF
-      if one:
-          if two:
-              if three:
-                  pass
+      foo:
+        bar:
+          baz: "test"
     EOF
 
-    vim.search 'two'
+    vim.search 'bar'
     vim.command 'Deleft'
     vim.write
 
     expect_file_contents <<~EOF
-      if one:
-          if three:
-              pass
+      foo:
+        baz: "test"
     EOF
   end
 
-  specify "Removes a wrapping if-clause with a following unindent" do
+  specify "Removes a wrapping object with a following unindent" do
     set_file_contents <<~EOF
-      if wrapping:
-          if one:
-              two
-          if another:
-              three
+      foo:
+        bar:
+          baz: "one"
+        quux:
+          baz: "two"
     EOF
 
-    vim.search 'one'
+    vim.search 'bar'
     vim.command 'Deleft'
     vim.write
 
     expect_file_contents <<~EOF
-      if wrapping:
-          two
-          if another:
-              three
+      foo:
+        baz: "one"
+        quux:
+          baz: "two"
     EOF
   end
 end

@@ -15,7 +15,7 @@ if !exists('g:loaded_matchit')
   endif
 endif
 
-let s:indent_based_filetypes = ['coffee', 'python', 'haml', 'slim']
+let s:indent_based_filetypes = ['coffee', 'haml', 'slim', 'yaml']
 
 if !exists('g:deleft_indent_based_filetypes')
   let g:deleft_indent_based_filetypes = []
@@ -29,14 +29,6 @@ if !exists('g:deleft_remove_strategy')
   " possible values: "none", "comment", "delete", "spaces"
   let g:deleft_remove_strategy = 'none'
 endif
-
-augroup Deleft
-  autocmd!
-
-  " Python doesn't have built-in matchit support, but this should work:
-  autocmd FileType python let b:deleft_match_words = '\<if\>:\<elif\>:\<else\>'
-  autocmd FileType python let b:deleft_match_skip  = 'R:^\s*'
-augroup END
 
 command! Deleft call s:Deleft()
 if g:deleft_mapping != ''
