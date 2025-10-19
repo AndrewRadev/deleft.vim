@@ -15,7 +15,7 @@ if !exists('g:loaded_matchit')
   endif
 endif
 
-let s:indent_based_filetypes = ['coffee', 'haml', 'slim', 'yaml']
+let s:indent_based_filetypes = ['python', 'coffee', 'haml', 'slim', 'yaml']
 
 if !exists('g:deleft_indent_based_filetypes')
   let g:deleft_indent_based_filetypes = []
