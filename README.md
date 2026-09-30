@@ -98,4 +98,4 @@ Some filetypes don't have useful matchit definitions for stuff like if-clauses a
 
 ## Contributing
 
-Pull requests are welcome, but take a look at [CONTRIBUTING.md](./CONTRIBUTING.md) first for some guidelines.
+Pull requests are welcome, as long as they **did not involve any LLM usage**. Take a look at [CONTRIBUTING.md](./CONTRIBUTING.md) first for some guidelines.
